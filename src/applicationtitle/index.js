@@ -7,7 +7,7 @@ const { PanelBody } = wp.components;
 import { ReactComponent as Logo } from "../bv-logo.svg";
 
 
-registerBlockType("pvd/applicationTitle", {
+registerBlockType("pvd/applicationtitle", {
    title: __("Apllications Title", "podkit"),
    icon: { src: Logo },
    category: "pvd",
