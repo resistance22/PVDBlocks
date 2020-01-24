@@ -115,7 +115,8 @@ function podkit_register_blocks() {
 		'pvd/pvdsingleheader',
 		'pvd/container',
 		'pvd/pngimage',
-		'pvd/pvdtitle'
+		'pvd/pvdtitle',
+		'pvd/applicationTitle'
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
@@ -123,7 +124,7 @@ function podkit_register_blocks() {
 		register_block_type( $block, array(
 			'editor_script' => 'podkit-editor-script',					// Calls registered script above
 			'editor_style' => 'podkit-editor-styles',					// Calls registered stylesheet above
-			'style' => 'podkit-front-end-styles',						// Calls registered stylesheet above
+			'style' => 'podkit-front-end-styles'					// Calls registered stylesheet above
 		) );	  
 	}
 
