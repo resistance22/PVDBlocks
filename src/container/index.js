@@ -16,7 +16,7 @@ registerBlockType("pvd/container", {
    // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
    edit( { className } ) {
 		return (
-			<div className={ className + " container"}>
+			<div className={ className + " container bootstrap-container"}>
 				<InnerBlocks />
 			</div>
 		);
@@ -25,7 +25,7 @@ registerBlockType("pvd/container", {
 	save(props) {
       const {className} = props;
 		return (
-			<div className="container">
+			<div className="container bootstrap-container">
 				<InnerBlocks.Content />
 			</div>
 		);
