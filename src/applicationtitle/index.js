@@ -52,14 +52,14 @@ registerBlockType("pvd/applicationtitle", {
       </InspectorControls>
         ,
         <div className="ap-title-cont">
-            <h1 style={styles}> 
+            <h3 style={styles}> 
                   <RichText 
                      className={className + " ap-title" }
                      placholder={__("نام اصلی","pvd")} 
                      value={attributes.titleText}
                      onChange={onChangeTitle}
                   />
-            </h1>
+            </h3>
         </div>
 
       ];
@@ -72,11 +72,11 @@ registerBlockType("pvd/applicationtitle", {
       }
       return (
          <div className="ap-title-cont">
-               <h1 style={styles}> 
+               <h3 style={styles}> 
                      <RichText.Content 
                         value = {attributes.titleText} 
                      />
-               </h1>
+               </h3>
          </div>
 
      );
