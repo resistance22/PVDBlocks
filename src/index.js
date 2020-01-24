@@ -4,4 +4,5 @@
  import "./fullHeader";
  import "./container";
  import "./pngimage";
- import "./pvdTitle"
+ import "./pvdTitle";
+ import './applicationtitle';
