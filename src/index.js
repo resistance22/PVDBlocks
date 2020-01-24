@@ -2,4 +2,5 @@
  * Import blocks as components.
  */
  import "./fullHeader";
- import "./container"
+ import "./container";
+ import "./pngimage";
