@@ -113,7 +113,8 @@ function podkit_register_blocks() {
 	// Array of block created in this plugin.
 	$blocks = [
 		'pvd/pvdsingleheader',
-		'pvd/container'
+		'pvd/container',
+		'pvd/pngimage'
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
