@@ -114,7 +114,8 @@ function podkit_register_blocks() {
 	$blocks = [
 		'pvd/pvdsingleheader',
 		'pvd/container',
-		'pvd/pngimage'
+		'pvd/pngimage',
+		'pvd/pvdtitle'
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
