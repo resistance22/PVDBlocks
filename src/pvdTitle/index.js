@@ -76,11 +76,8 @@ registerBlockType("pvd/pvdtitle", {
       return (
          <div className="pvd-maintitle-cont">
                <h1 style={styles}> 
-                     <RichText 
-                        className={className + " pvd-main-title" }
-                        placholder={__("نام اصلی","pvd")} 
-                        value={attributes.titleText}
-                        onChange={onChangeTitle}
+                     <RichText.Content 
+                        value = {attributes.titleText} 
                      />
                </h1>
          </div>
