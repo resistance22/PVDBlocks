@@ -6,3 +6,4 @@
  import "./pngimage";
  import "./pvdTitle";
  import './applicationtitle';
+ import './fullwidthcontainer';
