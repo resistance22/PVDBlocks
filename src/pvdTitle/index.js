@@ -12,9 +12,9 @@ registerBlockType("pvd/pvdtitle", {
    icon: { src: Logo },
    category: "pvd",
    attributes:{
-      titleText:{
-         type:'string',
-         source:'html',
+      content:{
+			source: 'html',
+			selector: 'h1',
       },
       color:{
          type:'text'
@@ -25,14 +25,12 @@ registerBlockType("pvd/pvdtitle", {
    },
  
    // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
-   edit:props => {
-      //console.info(props);
-      const {className,setAttributes,attributes} = props;
+   edit({className,setAttributes,attributes}){
       const styles = {
          color :  attributes.color
       }
-      const onChangeTitle = (titleText)=>{
-         setAttributes({ titleText })
+      const onChangeTitle = (content)=>{
+         setAttributes({ content })
       }
       const onColorChange = (color)=>{
          setAttributes({color})
@@ -54,32 +52,29 @@ registerBlockType("pvd/pvdtitle", {
          </PanelBody>
       </InspectorControls>
         ,
-        <div className="pvd-maintitle-cont">
-            <h1 style={styles}> 
-                  <RichText 
-                     className={className + " pvd-main-title" }
-                     placholder={__("نام اصلی","pvd")} 
-                     value={attributes.titleText}
-                     onChange={onChangeTitle}
-                  />
-            </h1>
+        <div style={styles} className="pvd-maintitle-cont">
+            <RichText 
+               tagName = 'h1'
+               className={className + " pvd-main-title" }
+               placholder={__("نام اصلی","pvd")} 
+               value={attributes.content}
+               onChange={onChangeTitle}
+            />
         </div>
 
       ];
    },
-   save:props=> {
-
-      const {attributes} = props;
+   save({ attributes }){
+      console.log(attributes);   
       const styles = {
          color :  attributes.color
       }
       return (
-         <div className="pvd-maintitle-cont">
-               <h1 style={styles}> 
-                     <RichText.Content 
-                        value = {attributes.titleText} 
-                     />
-               </h1>
+         <div style={styles} className="pvd-maintitle-cont">   
+            <RichText.Content 
+               value = {attributes.content} 
+               tagName = 'h1'
+            />
          </div>
 
      );
