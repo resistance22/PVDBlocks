@@ -34,8 +34,9 @@ registerBlockType("pvd/pvdsingleheader", {
          setAttributes({ headerTitle })
       }
       const onBGSelect = (imgOBJ)=>{
-         console.log(imgOBJ.sizes.large.url)
-         setAttributes({backgroundImage : imgOBJ.sizes.large.url})
+         console.log(imgOBJ)
+         console.log(imgOBJ.sizes.full.url)
+         setAttributes({backgroundImage : imgOBJ.sizes.full.url})
       }
      return (
         <div className="headerTitle">
