@@ -110,6 +110,27 @@ function podkit_register_blocks() {
 		filemtime( plugin_dir_path( __FILE__ ) . 'build/style.css' )	// set version as file last modified time
 	);
 
+
+
+		// Retister swiper.js.
+		wp_register_script(
+			'swiper.min.js',											// label
+			plugins_url( 'build/dependencies/swiper.min.js', __FILE__ ),						// script file
+		);
+		// Retister script.js.
+		wp_register_script(
+			'script.js',											// label
+			plugins_url( 'build/dependencies/script.js', __FILE__ ),						// script file
+			['swiper.min.js'],
+			null,
+			true
+		);
+
+		wp_register_style(
+			'swiper.min.css',										// label
+			plugins_url( 'build/dependencies/swiper.min.css', __FILE__ ),						// CSS file
+			
+		);
 	// Array of block created in this plugin.
 	$blocks = [
 		'pvd/pvdsingleheader',
@@ -128,11 +149,12 @@ function podkit_register_blocks() {
 			'style' => 'podkit-front-end-styles',					// Calls registered stylesheet above	
 		) );	  
 	}
-	register_block_type('pvd/postselect',[
+	register_block_type('pvd/archiveslider',[
 		'editor_script' => 'podkit-editor-script',					// Calls registered script above
 		'editor_style' => 'podkit-editor-styles',					// Calls registered stylesheet above
-		'style' => 'podkit-front-end-styles',					// Calls registered stylesheet above
-		'render_callback' => 'render_related_posts'	
+		'style' => ['podkit-front-end-styles','swiper.min.css'],					// Calls registered stylesheet above
+		'script' => ['script.js'],
+		'render_callback' => 'render_posts_slider'	
 	]);
 
 
@@ -155,6 +177,76 @@ function podkit_register_blocks() {
 		return $block_content;
 
 	}
+
+
+
+	function render_posts_slider($attributes){
+
+		$ID = $attributes['selectedCat'];
+		$term = get_term_by('id',$ID,'product_cat');
+		$posts = get_posts( [
+			'numberposts'      => -1,
+			'tax_query'         => [
+				[
+					'taxonomy' => 'product_cat',
+					'field' => 'term_id',
+					'terms' => $ID
+				]
+			],
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'post_type'        => 'product'
+		]);
+		$block_content = sprintf(
+			'<div class="col-12">
+				<h2>%1$s</h2>
+			</div>
+			<div class="swiper-container archive-slider">
+				<div class="swiper-wrapper">'
+		,
+		$term->name);
+		foreach( $posts as $post ){
+
+			// Built out our final output
+			$block_content .= sprintf(
+					'<div class="swiper-slide">
+						<div class="slider-bg">
+							<div class="white-bg"></div>
+							<div class="orange-bg"></div>
+						</div>
+						<a href="%3$s">
+							<div class="row no-gutters">
+								<div class="col-sm-12 col-md-6 col-lg-7">
+									<div class="slider-product-title">
+										<h3>%1$s</h3>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-6 col-lg-5">
+									<div class="product-image"><img src="%2$s" alt="%1$s"></div>
+								</div>
+							</div>
+						</a>
+					</div>',
+					$post->post_title,
+					get_the_post_thumbnail_url( $post->ID ),
+					esc_url( get_permalink( $post->ID ) )
+
+			);
+		}
+		
+		$block_content .= '</div> <!--swiper wrapper -->
+			<!-- If we need pagination -->
+			<div class="swiper-pagination"></div>
+		</div> <!--swiper container -->';
+
+		//echo '<pre>';
+		//print_r($term);
+		//echo '</pre>';
+
+		return $block_content;
+
+	}
+
 	
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 	/**
