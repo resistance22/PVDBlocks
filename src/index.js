@@ -7,4 +7,5 @@
  import "./pvdTitle";
  import './applicationtitle';
  import './fullwidthcontainer';
- import './PostSelection'
+ import './PostSelection';
+ import './archive-slider';
