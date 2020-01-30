@@ -117,7 +117,7 @@ function podkit_register_blocks() {
 		'pvd/pngimage',
 		'pvd/pvdtitle',
 		'pvd/applicationtitle',
-		'pvd/fullwidthcontainer'
+		'pvd/fullwidthcontainer',
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
@@ -125,10 +125,37 @@ function podkit_register_blocks() {
 		register_block_type( $block, array(
 			'editor_script' => 'podkit-editor-script',					// Calls registered script above
 			'editor_style' => 'podkit-editor-styles',					// Calls registered stylesheet above
-			'style' => 'podkit-front-end-styles'					// Calls registered stylesheet above
+			'style' => 'podkit-front-end-styles',					// Calls registered stylesheet above	
 		) );	  
 	}
+	register_block_type('pvd/postselect',[
+		'editor_script' => 'podkit-editor-script',					// Calls registered script above
+		'editor_style' => 'podkit-editor-styles',					// Calls registered stylesheet above
+		'style' => 'podkit-front-end-styles',					// Calls registered stylesheet above
+		'render_callback' => 'render_related_posts'	
+	]);
 
+
+	function render_related_posts($attributes){
+		$block_content = '<div class="container related-product"><div class="row no-gutters"><div class="col-12"> <h2>'.__('محصولات مرتبط','pvd').'</h2> </div>';
+		foreach( $attributes['selectedPosts'] as $ID ){
+
+			$post = get_post($ID);
+			// Built out our final output
+			$block_content .= sprintf(
+					'<div class="col-sm-6 col-md-4 col-lg-3"><a href="%3$s"><div class="p-inner"><div class="product-image"><img src="%2$s" alt="%1$s"></div><h3>%1$s</h3></div></a></div>',
+					$post->post_title,
+					get_the_post_thumbnail_url( $ID ),
+					esc_url( get_permalink( $ID ) )
+
+			);
+		}
+		$block_content .= '</div></div>';
+		
+		return $block_content;
+
+	}
+	
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 	/**
 	 * Adds internationalization support. 
