@@ -34,7 +34,7 @@ registerBlockType("pvd/postselect", {
       if( !attributes.categories ){
          wp.apiFetch(
             {
-               url: '/wp-json/wp/v2/product_cat'
+               url: php_variabels.site_url+'/wp-json/wp/v2/product_cat'
             }
          ).then((categories)=>{
             setAttributes({categories});
@@ -43,7 +43,7 @@ registerBlockType("pvd/postselect", {
       if( !attributes.posts ){
          wp.apiFetch(
             {
-               url: '/wp-json/wp/v2/product'
+               url: php_variabels.site_url+'/wp-json/wp/v2/product'
             }
          ).then((posts)=>{
             setAttributes({posts});
