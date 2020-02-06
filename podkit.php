@@ -206,7 +206,7 @@ function podkit_register_blocks() {
 		,
 		$term->name);
 		foreach( $posts as $post ){
-
+			$enname = get_post_meta($post->ID, 'engish_name',True);
 			// Built out our final output
 			$block_content .= sprintf(
 					'<div class="swiper-slide">
@@ -218,6 +218,9 @@ function podkit_register_blocks() {
 							<div class="row no-gutters">
 								<div class="col-sm-12 col-md-6 col-lg-7">
 									<div class="slider-product-title">
+										<h3 class="english_name">
+											%4$s
+										</h3>
 										<h3>%1$s</h3>
 									</div>
 								</div>
@@ -229,7 +232,8 @@ function podkit_register_blocks() {
 					</div>',
 					$post->post_title,
 					get_the_post_thumbnail_url( $post->ID ),
-					esc_url( get_permalink( $post->ID ) )
+					esc_url( get_permalink( $post->ID ) ),
+					$enname
 
 			);
 		}
@@ -239,9 +243,7 @@ function podkit_register_blocks() {
 			<div class="swiper-pagination"></div>
 		</div> <!--swiper container -->';
 
-		//echo '<pre>';
-		//print_r($term);
-		//echo '</pre>';
+
 
 		return $block_content;
 
