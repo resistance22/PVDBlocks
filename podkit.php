@@ -93,6 +93,12 @@ function podkit_register_blocks() {
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),		// dependencies
 		filemtime( plugin_dir_path( __FILE__ ) . 'build/index.js' )		// set version as file last modified time
 	);
+	
+	$php_vars = [
+		'site_url' => get_site_url()
+	];
+	wp_localize_script('podkit-editor-script','php_variabels',$php_vars);
+
 
 	// Register the block editor stylesheet.
 	wp_register_style(
@@ -158,6 +164,13 @@ function podkit_register_blocks() {
 	]);
 
 
+	register_block_type('pvd/postselect',[
+		'editor_script' => 'podkit-editor-script',					// Calls registered script above
+		'editor_style' => 'podkit-editor-styles',					// Calls registered stylesheet above
+		'style' => ['podkit-front-end-styles'],					// Calls registered stylesheet above
+		'render_callback' => 'render_related_posts'	
+	]);
+
 	function render_related_posts($attributes){
 		$block_content = '<div class="container related-product"><div class="row no-gutters"><div class="col-12"> <h2>'.__('محصولات مرتبط','pvd').'</h2> </div>';
 		foreach( $attributes['selectedPosts'] as $ID ){
@@ -181,7 +194,7 @@ function podkit_register_blocks() {
 
 
 	function render_posts_slider($attributes){
-
+		
 		$ID = $attributes['selectedCat'];
 		$term = get_term_by('id',$ID,'product_cat');
 		$posts = get_posts( [
