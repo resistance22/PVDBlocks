@@ -36,7 +36,7 @@ registerBlockType("pvd/pngimage", {
 			setAttributes({backgroundColor})
 		}
       const onBGSelect = (imgOBJ)=>{
-         setAttributes({Image : imgOBJ.sizes.large.url})
+         setAttributes({Image : imgOBJ.sizes.full.url})
       }
      return [
       <InspectorControls>

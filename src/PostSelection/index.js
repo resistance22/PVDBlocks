@@ -78,7 +78,6 @@ registerBlockType("pvd/postselect", {
          setAttributes({selectedPosts})
       }      
 
-      console.log('cats',attributes)
       return[
       <InspectorControls>
          <PanelBody title={__('Categories','pvd')}>

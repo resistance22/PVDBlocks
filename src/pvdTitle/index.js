@@ -65,7 +65,6 @@ registerBlockType("pvd/pvdtitle", {
       ];
    },
    save({ attributes }){
-      console.log(attributes);   
       const styles = {
          color :  attributes.color
       }

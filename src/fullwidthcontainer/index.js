@@ -26,7 +26,6 @@ registerBlockType("pvd/fullwidthcontainer", {
 			backgroundColor:attributes.backgroundColor
 		}
 		const onBackgroundChange = (backgroundColor)=>{
-			console.log(backgroundColor);
 			setAttributes({backgroundColor})
 		}
 		return [
