@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText, MediaUpload, MediaUploadCheck,ColorPalette,InspectorControls } = wp.editor;
+const { RichText, MediaUpload, MediaUploadCheck,ColorPalette,InspectorControls,select } = wp.editor;
 const { Button,PanelBody } = wp.components;
 // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
@@ -84,7 +84,7 @@ registerBlockType("pvd/pngimage", {
       }
       return (
          <div style={styles} class="pngImage">
-            <img src={attributes.Image} alt={attributes.altText} />
+            <img src={attributes.Image} alt="test" />
          </div>
      );
    }
